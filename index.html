@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AI Gaming Assistant at RISKBET365</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg: #0a0c10;
+      --bg2: #111318;
+      --bg3: #181c24;
+      --card: #13161e;
+      --border: rgba(255,255,255,0.07);
+      --border-hover: rgba(255,255,255,0.14);
+      --accent: #00e57a;
+      --accent2: #00b8ff;
+      --accent3: #ff6b35;
+      --text: #f0f2f5;
+      --text2: #8a8f9e;
+      --text3: #555a6a;
+      --gold: #f5c842;
+      --font-display: 'Bebas Neue', sans-serif;
+      --font-body: 'DM Sans', sans-serif;
+      --font-mono: 'DM Mono', monospace;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      font-size: 15px;
+      line-height: 1.6;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Background grid pattern */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(0,229,122,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,229,122,0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Glow orbs */
+    body::after {
+      content: '';
+      position: fixed;
+      top: -200px;
+      left: -200px;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(0,229,122,0.06) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .orb2 {
+      position: fixed;
+      bottom: -150px;
+      right: -150px;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(0,184,255,0.05) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ─── NAVBAR ─── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 32px;
+      height: 64px;
+      background: rgba(10,12,16,0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: var(--font-display);
+      font-size: 22px;
+      letter-spacing: 1px;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .nav-logo span {
+      color: var(--accent);
+    }
+
+    .nav-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 8px var(--accent);
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.8); }
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 4px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text2);
+      font-size: 13px;
+      font-weight: 500;
+      padding: 6px 14px;
+      border-radius: 6px;
+      transition: all 0.2s;
+      letter-spacing: 0.3px;
+    }
+
+    .nav-links a:hover, .nav-links a.active {
+      color: var(--text);
+      background: rgba(255,255,255,0.06);
+    }
+
+    .nav-links a.active {
+      color: var(--accent);
+    }
+
+    .nav-badge {
+      font-size: 11px;
+      font-weight: 600;
+      background: rgba(0,229,122,0.15);
+      color: var(--accent);
+      border: 1px solid rgba(0,229,122,0.3);
+      padding: 4px 10px;
+      border-radius: 20px;
+      letter-spacing: 0.5px;
+    }
+
+    /* ─── HERO ─── */
+    .hero {
+      position: relative;
+      z-index: 1;
+      padding: 80px 32px 60px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 20px;
+      font-family: var(--font-mono);
+    }
+
+    .hero-eyebrow::before {
+      content: '';
+      display: block;
+      width: 24px;
+      height: 1px;
+      background: var(--accent);
+    }
+
+    h1 {
+      font-family: var(--font-display);
+      font-size: clamp(48px, 7vw, 88px);
+      line-height: 0.95;
+      letter-spacing: 2px;
+      color: var(--text);
+      margin-bottom: 24px;
+    }
+
+    h1 em {
+      font-style: normal;
+      color: var(--accent);
+    }
+
+    .hero-sub {
+      font-size: 16px;
+      color: var(--text2);
+      max-width: 520px;
+      line-height: 1.7;
+      margin-bottom: 40px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      transition: all 0.2s;
+      text-decoration: none;
+      font-family: var(--font-body);
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #000;
+    }
+
+    .btn-primary:hover {
+      background: #00ff88;
+      transform: translateY(-1px);
+      box-shadow: 0 8px 24px rgba(0,229,122,0.3);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--text2);
+      border: 1px solid var(--border-hover);
+    }
+
+    .btn-ghost:hover {
+      color: var(--text);
+      border-color: rgba(255,255,255,0.2);
+      background: rgba(255,255,255,0.04);
+    }
+
+    /* ─── STATS BAR ─── */
+    .stats-bar {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      gap: 0;
+      max-width: 1100px;
+      margin: 0 auto 64px;
+      padding: 0 32px;
+    }
+
+    .stat-item {
+      flex: 1;
+      padding: 20px 24px;
+      border: 1px solid var(--border);
+      background: var(--card);
+      transition: border-color 0.2s;
+    }
+
+    .stat-item:first-child { border-radius: 10px 0 0 10px; }
+    .stat-item:last-child { border-radius: 0 10px 10px 0; border-left: none; }
+    .stat-item:not(:first-child):not(:last-child) { border-left: none; }
+
+    .stat-item:hover { border-color: var(--border-hover); }
+
+    .stat-value {
+      font-family: var(--font-display);
+      font-size: 32px;
+      letter-spacing: 1px;
+      color: var(--text);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .stat-value.green { color: var(--accent); }
+    .stat-value.blue { color: var(--accent2); }
+    .stat-value.orange { color: var(--accent3); }
+
+    .stat-label {
+      font-size: 12px;
+      color: var(--text3);
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    /* ─── SECTION ─── */
+    .section {
+      position: relative;
+      z-index: 1;
+      max-width: 1100px;
+      margin: 0 auto 64px;
+      padding: 0 32px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: 28px;
+      letter-spacing: 1px;
+      color: var(--text);
+    }
+
+    .section-title span {
+      color: var(--accent);
+    }
+
+    .section-meta {
+      font-size: 12px;
+      color: var(--text3);
+      font-family: var(--font-mono);
+    }
+
+    /* ─── SPORT TABS ─── */
+    .sport-tabs {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+
+    .tab {
+      padding: 7px 16px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--text2);
+      transition: all 0.2s;
+      font-family: var(--font-body);
+    }
+
+    .tab:hover { color: var(--text); border-color: var(--border-hover); }
+
+    .tab.active {
+      background: rgba(0,229,122,0.1);
+      border-color: rgba(0,229,122,0.4);
+      color: var(--accent);
+    }
+
+    /* ─── GAMES GRID ─── */
+    .games-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 16px;
+    }
+
+    .game-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      transition: all 0.25s;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .game-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), transparent);
+      opacity: 0;
+      transition: opacity 0.25s;
+    }
+
+    .game-card:hover {
+      border-color: var(--border-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 32px rgba(0,0,0,0.4);
+    }
+
+    .game-card:hover::before { opacity: 1; }
+
+    .game-card.featured {
+      border-color: rgba(0,229,122,0.25);
+      background: linear-gradient(135deg, rgba(0,229,122,0.04), var(--card));
+    }
+
+    .game-card.featured::before { opacity: 1; }
+
+    .card-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+
+    .sport-tag {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--text3);
+      font-family: var(--font-mono);
+    }
+
+    .value-badge {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-family: var(--font-mono);
+    }
+
+    .value-high {
+      background: rgba(0,229,122,0.12);
+      color: var(--accent);
+      border: 1px solid rgba(0,229,122,0.25);
+    }
+
+    .value-mid {
+      background: rgba(245,200,66,0.12);
+      color: var(--gold);
+      border: 1px solid rgba(245,200,66,0.25);
+    }
+
+    .value-low {
+      background: rgba(255,107,53,0.12);
+      color: var(--accent3);
+      border: 1px solid rgba(255,107,53,0.25);
+    }
+
+    .teams {
+      margin-bottom: 16px;
+    }
+
+    .team-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .team-row:last-child { border-bottom: none; }
+
+    .team-name {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    .team-odds {
+      font-family: var(--font-mono);
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--accent2);
+      background: rgba(0,184,255,0.08);
+      padding: 2px 8px;
+      border-radius: 4px;
+    }
+
+    .draw-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .draw-label {
+      font-size: 12px;
+      color: var(--text3);
+    }
+
+    .draw-odds {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: var(--text2);
+      background: rgba(255,255,255,0.05);
+      padding: 2px 8px;
+      border-radius: 4px;
+    }
+
+    .card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 14px;
+    }
+
+    .match-time {
+      font-size: 11px;
+      color: var(--text3);
+      font-family: var(--font-mono);
+    }
+
+    .ai-tip {
+      font-size: 11px;
+      color: var(--accent);
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .ai-tip::before {
+      content: '⚡';
+      font-size: 10px;
+    }
+
+    /* ─── LOADING STATE ─── */
+    .loading-state {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--text3);
+    }
+
+    .spinner {
+      width: 32px;
+      height: 32px;
+      border: 2px solid var(--border);
+      border-top-color: var(--accent);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin: 0 auto 16px;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .loading-text {
+      font-size: 13px;
+      color: var(--text3);
+      font-family: var(--font-mono);
+    }
+
+    /* ─── ERROR STATE ─── */
+    .error-state {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 40px 20px;
+      color: var(--text3);
+    }
+
+    .error-state p { font-size: 13px; margin-bottom: 8px; }
+    .error-state small { font-size: 11px; font-family: var(--font-mono); color: var(--text3); }
+
+    /* ─── FEATURED PICK ─── */
+    .featured-banner {
+      background: linear-gradient(135deg, rgba(0,229,122,0.08), rgba(0,184,255,0.06));
+      border: 1px solid rgba(0,229,122,0.2);
+      border-radius: 14px;
+      padding: 24px 28px;
+      margin-bottom: 32px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .featured-icon {
+      font-size: 32px;
+      flex-shrink: 0;
+    }
+
+    .featured-content { flex: 1; min-width: 200px; }
+
+    .featured-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-family: var(--font-mono);
+      margin-bottom: 4px;
+    }
+
+    .featured-title {
+      font-family: var(--font-display);
+      font-size: 22px;
+      letter-spacing: 1px;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .featured-desc {
+      font-size: 13px;
+      color: var(--text2);
+    }
+
+    .featured-odds-display {
+      text-align: right;
+      flex-shrink: 0;
+    }
+
+    .featured-odds-value {
+      font-family: var(--font-display);
+      font-size: 40px;
+      color: var(--accent);
+      letter-spacing: 2px;
+      line-height: 1;
+    }
+
+    .featured-odds-label {
+      font-size: 11px;
+      color: var(--text3);
+      font-family: var(--font-mono);
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      position: relative;
+      z-index: 1;
+      border-top: 1px solid var(--border);
+      padding: 32px;
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: gap;
+      gap: 16px;
+    }
+
+    .footer-logo {
+      font-family: var(--font-display);
+      font-size: 18px;
+      letter-spacing: 1px;
+      color: var(--text3);
+    }
+
+    .footer-disclaimer {
+      font-size: 11px;
+      color: var(--text3);
+      max-width: 500px;
+      line-height: 1.6;
+      text-align: center;
+    }
+
+    .footer-disclaimer strong { color: var(--accent3); }
+
+    /* ─── ANIMATIONS ─── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .fade-up {
+      animation: fadeUp 0.5s ease forwards;
+      opacity: 0;
+    }
+
+    .fade-up:nth-child(1) { animation-delay: 0.05s; }
+    .fade-up:nth-child(2) { animation-delay: 0.1s; }
+    .fade-up:nth-child(3) { animation-delay: 0.15s; }
+    .fade-up:nth-child(4) { animation-delay: 0.2s; }
+    .fade-up:nth-child(5) { animation-delay: 0.25s; }
+    .fade-up:nth-child(6) { animation-delay: 0.3s; }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 640px) {
+      nav { padding: 0 16px; }
+      .nav-links { display: none; }
+      .hero { padding: 48px 16px 40px; }
+      .stats-bar { padding: 0 16px; flex-wrap: wrap; }
+      .stat-item { border-radius: 10px !important; border-left: 1px solid var(--border) !important; flex: 1 1 40%; }
+      .section { padding: 0 16px; }
+      .games-grid { grid-template-columns: 1fr; }
+      footer { padding: 24px 16px; flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="orb2"></div>
+
+<!-- NAVBAR -->
+<nav>
+  <div class="nav-logo">
+    <div class="nav-dot"></div>
+    AI GAMING <span>&nbsp;RISKBET365</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#" class="active">Home</a></li>
+    <li><a href="#football">Football</a></li>
+    <li><a href="#basketball">Basketball</a></li>
+    <li><a href="#ufc">UFC</a></li>
+  </ul>
+  <div class="nav-badge">LIVE ODDS</div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-eyebrow">AI-Powered Betting Intelligence</div>
+  <h1>FIND YOUR<br><em>BEST BET</em><br>TODAY</h1>
+  <p class="hero-sub">Real-time odds pulled live from the market. All sports, all leagues — filtered and displayed so you can make smarter decisions.</p>
+  <div class="hero-actions">
+    <button class="btn btn-primary" onclick="loadAllOdds()">⚡ Refresh Live Odds</button>
+    <a href="#football" class="btn btn-ghost">Browse Matches →</a>
+  </div>
+</section>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stat-item">
+    <div class="stat-value green" id="stat-games">—</div>
+    <div class="stat-label">Live matches</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-value blue" id="stat-sports">3</div>
+    <div class="stat-label">Sports covered</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-value orange" id="stat-best">—</div>
+    <div class="stat-label">Best odds today</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-value" id="stat-updated">—</div>
+    <div class="stat-label">Last updated</div>
+  </div>
+</div>
+
+<!-- FOOTBALL SECTION -->
+<section class="section" id="football">
+  <div class="section-header">
+    <div class="section-title">⚽ Football <span>/ Soccer</span></div>
+    <div class="section-meta" id="football-meta">Loading...</div>
+  </div>
+  <div class="sport-tabs" id="football-tabs">
+    <button class="tab active" onclick="filterLeague('football', 'all', this)">All Leagues</button>
+    <button class="tab" onclick="filterLeague('football', 'soccer_epl', this)">Premier League</button>
+    <button class="tab" onclick="filterLeague('football', 'soccer_spain_la_liga', this)">La Liga</button>
+    <button class="tab" onclick="filterLeague('football', 'soccer_uefa_champs_league', this)">Champions League</button>
+  </div>
+  <div class="games-grid" id="football-grid">
+    <div class="loading-state">
+      <div class="spinner"></div>
+      <div class="loading-text">Fetching live odds...</div>
+    </div>
+  </div>
+</section>
+
+<!-- BASKETBALL SECTION -->
+<section class="section" id="basketball">
+  <div class="section-header">
+    <div class="section-title">🏀 Basketball <span>/ NBA</span></div>
+    <div class="section-meta" id="basketball-meta">Loading...</div>
+  </div>
+  <div class="games-grid" id="basketball-grid">
+    <div class="loading-state">
+      <div class="spinner"></div>
+      <div class="loading-text">Fetching live odds...</div>
+    </div>
+  </div>
+</section>
+
+<!-- UFC SECTION -->
+<section class="section" id="ufc">
+  <div class="section-header">
+    <div class="section-title">🥊 UFC <span>/ MMA</span></div>
+    <div class="section-meta" id="ufc-meta">Loading...</div>
+  </div>
+  <div class="games-grid" id="ufc-grid">
+    <div class="loading-state">
+      <div class="spinner"></div>
+      <div class="loading-text">Fetching live odds...</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">AI GAMING / RISKBET365</div>
+  <div class="footer-disclaimer">
+    <strong>⚠ Responsible Gambling:</strong> This site is for informational purposes only. Odds data is pulled live and may change. Gambling involves risk — never bet more than you can afford to lose. If gambling is affecting your life, seek help.
+  </div>
+</footer>
+
+<script>
+  const API_KEY = 'dbd9d18741e8a073ff58e77a564b22d7';
+  const BASE = 'https://api.the-odds-api.com/v4';
+
+  const SPORTS = {
+    football: ['soccer_epl','soccer_spain_la_liga','soccer_uefa_champs_league','soccer_italy_serie_a','soccer_germany_bundesliga'],
+    basketball: ['basketball_nba'],
+    ufc: ['mma_mixed_martial_arts']
+  };
+
+  let allData = { football: [], basketball: [], ufc: [] };
+  let bestOdds = 0;
+
+  function getValueClass(odds) {
+    if (odds >= 2.5) return 'value-high';
+    if (odds >= 1.7) return 'value-mid';
+    return 'value-low';
+  }
+
+  function getValueLabel(odds) {
+    if (odds >= 2.5) return '🔥 HIGH VALUE';
+    if (odds >= 1.7) return '✓ GOOD VALUE';
+    return 'LOW VALUE';
+  }
+
+  function formatOdds(decimal) {
+    return parseFloat(decimal).toFixed(2);
+  }
+
+  function formatTime(dateStr) {
+    const d = new Date(dateStr);
+    return d.toLocaleDateString('en-GB', { weekday:'short', month:'short', day:'numeric', hour:'2-digit', minute:'2-digit' });
+  }
+
+  function getAITip(outcomes) {
+    if (!outcomes || outcomes.length === 0) return null;
+    const sorted = [...outcomes].sort((a,b) => b.price - a.price);
+    const best = sorted[0];
+    if (best.price >= 2.5) return `Best value: ${best.name} @ ${formatOdds(best.price)}`;
+    return null;
+  }
+
+  function buildCard(game, sportLabel) {
+    const outcomes = game.bookmakers?.[0]?.markets?.[0]?.outcomes || [];
+    if (outcomes.length === 0) return null;
+
+    const maxOdds = Math.max(...outcomes.map(o => o.price));
+    const valueClass = getValueClass(maxOdds);
+    const valueLabel = getValueLabel(maxOdds);
+    const aiTip = getAITip(outcomes);
+    const isFeatured = maxOdds >= 2.8;
+
+    if (maxOdds > bestOdds) bestOdds = maxOdds;
+
+    const teamsHTML = outcomes.map(o => `
+      <div class="team-row">
+        <span class="team-name">${o.name}</span>
+        <span class="team-odds">${formatOdds(o.price)}</span>
+      </div>
+    `).join('');
+
+    return `
+      <div class="game-card fade-up ${isFeatured ? 'featured' : ''}">
+        <div class="card-top">
+          <span class="sport-tag">${sportLabel}</span>
+          <span class="value-badge ${valueClass}">${valueLabel}</span>
+        </div>
+        <div class="teams">${teamsHTML}</div>
+        <div class="card-footer">
+          <span class="match-time">${formatTime(game.commence_time)}</span>
+          ${aiTip ? `<span class="ai-tip">${aiTip}</span>` : ''}
+        </div>
+      </div>
+    `;
+  }
+
+  function renderGrid(gridId, metaId, games, sportLabel) {
+    const grid = document.getElementById(gridId);
+    const meta = document.getElementById(metaId);
+
+    if (!games || games.length === 0) {
+      grid.innerHTML = `<div class="error-state"><p>No upcoming matches found right now.</p><small>Check back later for new odds.</small></div>`;
+      meta.textContent = '0 matches';
+      return;
+    }
+
+    const cards = games.map(g => buildCard(g, sportLabel)).filter(Boolean);
+    grid.innerHTML = cards.join('') || `<div class="error-state"><p>No odds available right now.</p></div>`;
+    meta.textContent = `${games.length} matches found`;
+  }
+
+  async function fetchSport(sportKeys) {
+    const results = [];
+    for (const key of sportKeys) {
+      try {
+        const res = await fetch(`${BASE}/sports/${key}/odds/?apiKey=${API_KEY}&regions=eu&markets=h2h&oddsFormat=decimal`);
+        if (!res.ok) continue;
+        const data = await res.json();
+        results.push(...data);
+      } catch(e) { /* skip failed sport */ }
+    }
+    return results;
+  }
+
+  async function loadAllOdds() {
+    bestOdds = 0;
+    document.getElementById('stat-updated').textContent = '...';
+
+    ['football-grid','basketball-grid','ufc-grid'].forEach(id => {
+      document.getElementById(id).innerHTML = '<div class="loading-state"><div class="spinner"></div><div class="loading-text">Fetching live odds...</div></div>';
+    });
+
+    try {
+      const [football, basketball, ufc] = await Promise.all([
+        fetchSport(SPORTS.football),
+        fetchSport(SPORTS.basketball),
+        fetchSport(SPORTS.ufc)
+      ]);
+
+      allData.football = football;
+      allData.basketball = basketball;
+      allData.ufc = ufc;
+
+      renderGrid('football-grid', 'football-meta', football, 'FOOTBALL');
+      renderGrid('basketball-grid', 'basketball-meta', basketball, 'NBA');
+      renderGrid('ufc-grid', 'ufc-meta', ufc, 'UFC / MMA');
+
+      const total = football.length + basketball.length + ufc.length;
+      document.getElementById('stat-games').textContent = total;
+      document.getElementById('stat-best').textContent = bestOdds > 0 ? formatOdds(bestOdds) : '—';
+      document.getElementById('stat-updated').textContent = new Date().toLocaleTimeString('en-GB', {hour:'2-digit',minute:'2-digit'});
+
+    } catch(e) {
+      ['football-grid','basketball-grid','ufc-grid'].forEach(id => {
+        document.getElementById(id).innerHTML = `<div class="error-state"><p>Could not load odds.</p><small>${e.message}</small></div>`;
+      });
+    }
+  }
+
+  function filterLeague(sport, leagueKey, btn) {
+    document.querySelectorAll('#football-tabs .tab').forEach(t => t.classList.remove('active'));
+    btn.classList.add('active');
+
+    const games = leagueKey === 'all'
+      ? allData.football
+      : allData.football.filter(g => g.sport_key === leagueKey);
+
+    renderGrid('football-grid', 'football-meta', games, 'FOOTBALL');
+  }
+
+  // Auto-load on page open
+  loadAllOdds();
+</script>
+</body>
+</html>
