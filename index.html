@@ -1,1 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AI Gaming Assistant at RISKBET365</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg:#0a0c10;--card:#13161e;--border:rgba(255,255,255,0.07);--border-hover:rgba(255,255,255,0.14);
+      --accent:#00e57a;--accent2:#00b8ff;--accent3:#ff6b35;
+      --text:#f0f2f5;--text2:#8a8f9e;--text3:#555a6a;--gold:#f5c842;
+      --fd:'Bebas Neue',sans-serif;--fb:'DM Sans',sans-serif;--fm:'DM Mono',monospace;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:15px;line-height:1.6;min-height:100vh;overflow-x:hidden}
+    body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(0,229,122,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,229,122,0.03) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;z-index:0}
+    .orb{position:fixed;border-radius:50%;pointer-events:none;z-index:0}
+    .orb1{top:-200px;left:-200px;width:600px;height:600px;background:radial-gradient(circle,rgba(0,229,122,0.06) 0%,transparent 70%)}
+    .orb2{bottom:-150px;right:-150px;width:500px;height:500px;background:radial-gradient(circle,rgba(0,184,255,0.05) 0%,transparent 70%)}
+    nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 32px;height:64px;background:rgba(10,12,16,0.9);backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
+    .nav-logo{font-family:var(--fd);font-size:22px;letter-spacing:1px;color:var(--text);display:flex;align-items:center;gap:10px}
+    .nav-logo span{color:var(--accent)}
+    .ndot{width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 8px var(--accent);animation:pulse 2s ease-in-out infinite}
+    @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.8)}}
+    .nav-links{display:flex;gap:4px;list-style:none}
+    .nav-links a{text-decoration:none;color:var(--text2);font-size:13px;font-weight:500;padding:6px 14px;border-radius:6px;transition:all .2s}
+    .nav-links a:hover,.nav-links a.active{color:var(--text);background:rgba(255,255,255,.06)}
+    .nav-links a.active{color:var(--accent)}
+    .nbadge{font-size:11px;font-weight:600;background:rgba(0,229,122,.15);color:var(--accent);border:1px solid rgba(0,229,122,.3);padding:4px 10px;border-radius:20px;letter-spacing:.5px}
+    .hero{position:relative;z-index:1;padding:80px 32px 60px;max-width:1100px;margin:0 auto}
+    .eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:20px;font-family:var(--fm)}
+    .eyebrow::before{content:'';display:block;width:24px;height:1px;background:var(--accent)}
+    h1{font-family:var(--fd);font-size:clamp(48px,7vw,88px);line-height:.95;letter-spacing:2px;color:var(--text);margin-bottom:24px}
+    h1 em{font-style:normal;color:var(--accent)}
+    .sub{font-size:16px;color:var(--text2);max-width:520px;line-height:1.7;margin-bottom:40px}
+    .actions{display:flex;gap:12px;flex-wrap:wrap}
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 24px;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;border:none;transition:all .2s;text-decoration:none;font-family:var(--fb)}
+    .btn-p{background:var(--accent);color:#000}
+    .btn-p:hover{background:#00ff88;transform:translateY(-1px);box-shadow:0 8px 24px rgba(0,229,122,.3)}
+    .btn-g{background:transparent;color:var(--text2);border:1px solid var(--border-hover)}
+    .btn-g:hover{color:var(--text);border-color:rgba(255,255,255,.2);background:rgba(255,255,255,.04)}
+    .stats{position:relative;z-index:1;display:flex;max-width:1100px;margin:0 auto 64px;padding:0 32px}
+    .si{flex:1;padding:20px 24px;border:1px solid var(--border);background:var(--card);transition:border-color .2s}
+    .si:first-child{border-radius:10px 0 0 10px}
+    .si:last-child{border-radius:0 10px 10px 0;border-left:none}
+    .si:not(:first-child):not(:last-child){border-left:none}
+    .si:hover{border-color:var(--border-hover)}
+    .sv{font-family:var(--fd);font-size:32px;letter-spacing:1px;color:var(--text);line-height:1;margin-bottom:4px}
+    .sv.g{color:var(--accent)}.sv.b{color:var(--accent2)}.sv.o{color:var(--accent3)}
+    .sl{font-size:12px;color:var(--text3);font-weight:500;letter-spacing:.5px;text-transform:uppercase}
+    .section{position:relative;z-index:1;max-width:1100px;margin:0 auto 64px;padding:0 32px}
+    .sh{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:24px;flex-wrap:wrap;gap:12px}
+    .st{font-family:var(--fd);font-size:28px;letter-spacing:1px;color:var(--text)}
+    .st span{color:var(--accent)}
+    .sm{font-size:12px;color:var(--text3);font-family:var(--fm)}
+    .tabs{display:flex;gap:8px;margin-bottom:24px;flex-wrap:wrap}
+    .tab{padding:7px 16px;border-radius:6px;font-size:13px;font-weight:500;cursor:pointer;border:1px solid var(--border);background:transparent;color:var(--text2);transition:all .2s;font-family:var(--fb)}
+    .tab:hover{color:var(--text);border-color:var(--border-hover)}
+    .tab.active{background:rgba(0,229,122,.1);border-color:rgba(0,229,122,.4);color:var(--accent)}
+    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px}
+    .card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px;transition:all .25s;position:relative;overflow:hidden}
+    .card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;opacity:0;transition:opacity .25s}
+    .card.vh::before{background:linear-gradient(90deg,var(--accent),transparent)}
+    .card.vm::before{background:linear-gradient(90deg,var(--gold),transparent)}
+    .card.vl::before{background:linear-gradient(90deg,var(--accent3),transparent)}
+    .card:hover{border-color:var(--border-hover);transform:translateY(-2px);box-shadow:0 12px 32px rgba(0,0,0,.4)}
+    .card:hover::before{opacity:1}
+    .card.top{border-color:rgba(0,229,122,.3)}
+    .card.top::before{opacity:1}
+    .ch{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+    .ctag{font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--text3);font-family:var(--fm)}
+    .cleague{font-size:11px;color:var(--text2);margin-top:2px}
+    .circle{width:48px;height:48px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;border:2px solid;flex-shrink:0}
+    .circle.h{border-color:var(--accent);background:rgba(0,229,122,.08)}
+    .circle.m{border-color:var(--gold);background:rgba(245,200,66,.08)}
+    .circle.l{border-color:var(--accent3);background:rgba(255,107,53,.08)}
+    .circle.n{border-color:var(--text3);background:transparent}
+    .cn{font-family:var(--fd);font-size:18px;line-height:1}
+    .circle.h .cn{color:var(--accent)}.circle.m .cn{color:var(--gold)}.circle.l .cn{color:var(--accent3)}.circle.n .cn{color:var(--text3)}
+    .clbl{font-size:8px;text-transform:uppercase;letter-spacing:.5px;color:var(--text3);font-family:var(--fm)}
+    .teams{margin-bottom:14px;border:1px solid var(--border);border-radius:8px;overflow:hidden}
+    .tr{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border-bottom:1px solid var(--border);transition:background .15s}
+    .tr:last-child{border-bottom:none}
+    .tr.rec{background:rgba(0,229,122,.06)}
+    .tl{display:flex;align-items:center;gap:8px}
+    .rdot{width:6px;height:6px;border-radius:50%;background:var(--accent);flex-shrink:0}
+    .tname{font-size:14px;font-weight:500;color:var(--text)}
+    .tright{display:flex;align-items:center;gap:10px}
+    .todds{font-family:var(--fm);font-size:15px;font-weight:500;color:var(--accent2);background:rgba(0,184,255,.08);padding:3px 10px;border-radius:5px}
+    .iprob{font-size:11px;color:var(--text3);font-family:var(--fm)}
+    .dr{display:flex;align-items:center;justify-content:space-between;padding:8px 14px;border-bottom:1px solid var(--border);background:rgba(255,255,255,.02)}
+    .dlbl{font-size:12px;color:var(--text3)}
+    .dodds{font-family:var(--fm);font-size:13px;color:var(--text2);background:rgba(255,255,255,.05);padding:2px 8px;border-radius:4px}
+    .form-wrap{margin-bottom:12px}
+    .flbl{font-size:10px;color:var(--text3);letter-spacing:1px;text-transform:uppercase;font-family:var(--fm);margin-bottom:6px}
+    .fdots{display:flex;gap:4px}
+    .fd{width:20px;height:20px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;font-family:var(--fm)}
+    .fd.W{background:rgba(0,229,122,.2);color:var(--accent)}
+    .fd.D{background:rgba(245,200,66,.2);color:var(--gold)}
+    .fd.L{background:rgba(255,107,53,.2);color:var(--accent3)}
+    .aib{background:rgba(0,229,122,.04);border:1px solid rgba(0,229,122,.15);border-radius:8px;padding:12px 14px;margin-bottom:12px}
+    .ail{font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent);font-family:var(--fm);margin-bottom:6px}
+    .ait{font-size:12px;color:var(--text2);line-height:1.6}
+    .cf{display:flex;align-items:center;justify-content:space-between;margin-top:4px}
+    .mt{font-size:11px;color:var(--text3);font-family:var(--fm)}
+    .bkt{font-size:10px;color:var(--text3)}
+    .ls{grid-column:1/-1;text-align:center;padding:60px 20px;color:var(--text3)}
+    .sp{width:32px;height:32px;border:2px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 16px}
+    @keyframes spin{to{transform:rotate(360deg)}}
+    .lt{font-size:13px;color:var(--text3);font-family:var(--fm)}
+    .es{grid-column:1/-1;text-align:center;padding:40px 20px}
+    .es p{font-size:13px;color:var(--text2);margin-bottom:6px}
+    .es small{font-size:11px;font-family:var(--fm);color:var(--text3)}
+    footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:32px;max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
+    .flogo{font-family:var(--fd);font-size:18px;letter-spacing:1px;color:var(--text3)}
+    .fdis{font-size:11px;color:var(--text3);max-width:500px;line-height:1.6;text-align:center}
+    .fdis strong{color:var(--accent3)}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+    .fu{animation:fadeUp .5s ease forwards;opacity:0}
+    .fu:nth-child(1){animation-delay:.05s}.fu:nth-child(2){animation-delay:.1s}.fu:nth-child(3){animation-delay:.15s}
+    .fu:nth-child(4){animation-delay:.2s}.fu:nth-child(5){animation-delay:.25s}.fu:nth-child(6){animation-delay:.3s}
+    @media(max-width:640px){
+      nav{padding:0 16px}.nav-links{display:none}
+      .hero{padding:48px 16px 40px}.stats{padding:0 16px;flex-wrap:wrap}
+      .si{border-radius:10px!important;border-left:1px solid var(--border)!important;flex:1 1 40%}
+      .section{padding:0 16px}.grid{grid-template-columns:1fr}
+      footer{padding:24px 16px;flex-direction:column;text-align:center}
+    }
+  </style>
+</head>
+<body>
+<div class="orb orb1"></div>
+<div class="orb orb2"></div>
 
+<nav>
+  <div class="nav-logo"><div class="ndot"></div>AI GAMING <span>&nbsp;RISKBET365</span></div>
+  <ul class="nav-links">
+    <li><a href="#" class="active">Home</a></li>
+    <li><a href="#football">Football</a></li>
+    <li><a href="#basketball">Basketball</a></li>
+    <li><a href="#ufc">UFC</a></li>
+  </ul>
+  <div class="nbadge">LIVE ODDS</div>
+</nav>
+
+<section class="hero">
+  <div class="eyebrow">AI Smart Value Betting</div>
+  <h1>FIND YOUR<br><em>BEST BET</em><br>TODAY</h1>
+  <p class="sub">Live odds + real team form = smart value score. Not just the highest odds — the bet that actually makes sense based on recent performance.</p>
+  <div class="actions">
+    <button class="btn btn-p" onclick="loadAll()">⚡ Refresh Live Odds</button>
+    <a href="#football" class="btn btn-g">Browse Matches →</a>
+  </div>
+</section>
+
+<div class="stats">
+  <div class="si"><div class="sv g" id="sg">—</div><div class="sl">Live matches</div></div>
+  <div class="si"><div class="sv b" id="sp">—</div><div class="sl">Smart picks</div></div>
+  <div class="si"><div class="sv o" id="sb">—</div><div class="sl">Best value score</div></div>
+  <div class="si"><div class="sv" id="su">—</div><div class="sl">Last updated</div></div>
+</div>
+
+<section class="section" id="football">
+  <div class="sh">
+    <div class="st">⚽ Football <span>/ Soccer</span></div>
+    <div class="sm" id="fm">Loading...</div>
+  </div>
+  <div class="tabs">
+    <button class="tab active" onclick="filterFb('all',this)">All Leagues</button>
+    <button class="tab" onclick="filterFb('soccer_epl',this)">Premier League</button>
+    <button class="tab" onclick="filterFb('soccer_spain_la_liga',this)">La Liga</button>
+    <button class="tab" onclick="filterFb('soccer_uefa_champs_league',this)">Champions League</button>
+  </div>
+  <div class="grid" id="fg"><div class="ls"><div class="sp"></div><div class="lt">Fetching live odds...</div></div></div>
+</section>
+
+<section class="section" id="basketball">
+  <div class="sh">
+    <div class="st">🏀 Basketball <span>/ NBA</span></div>
+    <div class="sm" id="bm">Loading...</div>
+  </div>
+  <div class="grid" id="bg"><div class="ls"><div class="sp"></div><div class="lt">Fetching live odds...</div></div></div>
+</section>
+
+<section class="section" id="ufc">
+  <div class="sh">
+    <div class="st">🥊 UFC <span>/ MMA</span></div>
+    <div class="sm" id="um">Loading...</div>
+  </div>
+  <div class="grid" id="ug"><div class="ls"><div class="sp"></div><div class="lt">Fetching live odds...</div></div></div>
+</section>
+
+<footer>
+  <div class="flogo">AI GAMING / RISKBET365</div>
+  <div class="fdis"><strong>⚠ Responsible Gambling:</strong> For informational purposes only. Value scores are algorithmic estimates — not guarantees. Never bet more than you can afford to lose.</div>
+</footer>
+
+<script>
+const OK = 'dbd9d18741e8a073ff58e77a564b22d7';
+const RK = '7e5b655766msh21172db609e15ccp12c2bcjsn0ce72809dbe3';
+const OB = 'https://api.the-odds-api.com/v4';
+const FBK = ['soccer_epl','soccer_spain_la_liga','soccer_uefa_champs_league','soccer_italy_serie_a','soccer_germany_bundesliga'];
+
+let allFb = [], smartPicks = 0, bestScore = 0;
+
+async function getOdds(key) {
+  try {
+    const r = await fetch(`${OB}/sports/${key}/odds/?apiKey=${OK}&regions=eu&markets=h2h&oddsFormat=decimal`);
+    return r.ok ? await r.json() : [];
+  } catch(e) { return []; }
+}
+
+async function getForm(teamName) {
+  try {
+    const s = await fetch(`https://api-football-v1.p.rapidapi.com/v3/teams?search=${encodeURIComponent(teamName)}`,
+      {headers:{'x-rapidapi-key':RK,'x-rapidapi-host':'api-football-v1.p.rapidapi.com'}});
+    if (!s.ok) return null;
+    const sd = await s.json();
+    const team = sd.response?.[0];
+    if (!team) return null;
+    const tid = team.team.id;
+
+    const f = await fetch(`https://api-football-v1.p.rapidapi.com/v3/fixtures?team=${tid}&last=5`,
+      {headers:{'x-rapidapi-key':RK,'x-rapidapi-host':'api-football-v1.p.rapidapi.com'}});
+    if (!f.ok) return null;
+    const fd = await f.json();
+    const fixtures = fd.response || [];
+
+    let w=0,d=0,l=0;
+    const form = fixtures.map(fx => {
+      const h = fx.teams.home, aw = fx.teams.away;
+      const isH = h.id === tid;
+      if (h.winner===null && aw.winner===null){d++;return'D';}
+      const won = isH ? h.winner : aw.winner;
+      if(won){w++;return'W';} l++;return'L';
+    });
+    const fs = ((w*3+d*1)/((w+d+l||1)*3))*100;
+    return {form,w,d,l,fs};
+  } catch(e){return null;}
+}
+
+function calcScore(odds, formPct) {
+  const imp = (1/odds)*100/1.05;
+  const real = formPct*0.6 + imp*0.4;
+  const edge = real - imp;
+  const score = Math.min(10, Math.max(0, 5+(edge/5)));
+  return {score:+score.toFixed(1), edge:+edge.toFixed(1), imp:+imp.toFixed(1), real:+real.toFixed(1)};
+}
+
+function scClass(s){return s>=6.5?'h':s>=4.5?'m':'l';}
+function cardClass(s){return s>=6.5?'vh':s>=4.5?'vm':'vl';}
+function fmt(v){return parseFloat(v).toFixed(2);}
+function fmtTime(d){return new Date(d).toLocaleDateString('en-GB',{weekday:'short',month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'});}
+
+function formDots(form){
+  if(!form||!form.length) return '<span style="font-size:11px;color:var(--text3)">No data</span>';
+  return form.map(r=>`<div class="fd ${r}">${r}</div>`).join('');
+}
+
+async function buildCard(game, label, useForm) {
+  const outcomes = game.bookmakers?.[0]?.markets?.[0]?.outcomes||[];
+  if(!outcomes.length) return null;
+
+  let formMap={}, bestOut=null, bestVS={score:0,edge:0,imp:0,real:0};
+
+  if(useForm){
+    for(const o of outcomes){
+      if(o.name==='Draw') continue;
+      const fd = await getForm(o.name);
+      formMap[o.name]=fd;
+      const vs = calcScore(o.price, fd?fd.fs:50);
+      if(vs.score>bestVS.score){bestVS=vs;bestOut=o;}
+    }
+  } else {
+    bestOut = outcomes.reduce((a,b)=>a.price>b.price?a:b);
+    bestVS = calcScore(bestOut.price,50);
+  }
+  if(!bestOut) bestOut=outcomes[0];
+
+  const sc=scClass(bestVS.score), cc=cardClass(bestVS.score);
+  const isTop=bestVS.score>=6.5;
+  if(bestVS.score>bestScore) bestScore=bestVS.score;
+  if(isTop) smartPicks++;
+
+  const teamsHTML = outcomes.map(o=>{
+    const ip=((1/o.price)*100).toFixed(0);
+    if(o.name==='Draw') return `<div class="dr"><span class="dlbl">Draw</span><div style="display:flex;align-items:center;gap:8px"><span class="iprob">${ip}%</span><span class="dodds">${fmt(o.price)}</span></div></div>`;
+    const rec=o.name===bestOut.name;
+    return `<div class="tr${rec?' rec':''}"><div class="tl">${rec?'<div class="rdot"></div>':'<div style="width:6px"></div>'}<span class="tname">${o.name}</span></div><div class="tright"><span class="iprob">${ip}%</span><span class="todds">${fmt(o.price)}</span></div></div>`;
+  }).join('');
+
+  const fd=formMap[bestOut.name];
+  const formHTML = useForm&&fd ? `<div class="form-wrap"><div class="flbl">${bestOut.name} — last 5</div><div class="fdots">${formDots(fd.form)}</div></div>` : '';
+
+  const edgeTxt = bestVS.edge>0
+    ? `Real win chance (${bestVS.real.toFixed(0)}%) beats bookmaker price (${bestVS.imp.toFixed(0)}%) — edge of +${bestVS.edge.toFixed(1)}%.`
+    : `Bookmaker price (${bestVS.imp.toFixed(0)}%) is higher than real form estimate (${bestVS.real.toFixed(0)}%) — low value.`;
+  const formTxt = fd ? `Form: ${fd.w}W ${fd.d}D ${fd.l}L last 5 games.` : '';
+  const reasoning = `${formTxt} ${edgeTxt} Best odds: ${fmt(bestOut.price)}.`;
+
+  return `<div class="card ${cc}${isTop?' top':''} fu">
+    <div class="ch">
+      <div><div class="ctag">${label}</div><div class="cleague">${game.sport_title||''}</div></div>
+      <div class="circle ${sc}"><span class="cn">${bestVS.score}</span><span class="clbl">VALUE</span></div>
+    </div>
+    <div class="teams">${teamsHTML}</div>
+    ${formHTML}
+    <div class="aib"><div class="ail">⚡ AI Pick: ${bestOut.name}</div><div class="ait">${reasoning}</div></div>
+    <div class="cf"><span class="mt">${fmtTime(game.commence_time)}</span><span class="bkt">${game.bookmakers?.[0]?.title||''}</span></div>
+  </div>`;
+}
+
+async function renderGrid(gid, mid, games, label, useForm) {
+  const g=document.getElementById(gid), m=document.getElementById(mid);
+  if(!games||!games.length){
+    g.innerHTML=`<div class="es"><p>No upcoming matches found.</p><small>Check back later.</small></div>`;
+    m.textContent='0 matches'; return;
+  }
+  g.innerHTML=`<div class="ls"><div class="sp"></div><div class="lt">Calculating value scores...</div></div>`;
+  const cards=(await Promise.all(games.slice(0,9).map(gm=>buildCard(gm,label,useForm)))).filter(Boolean);
+  g.innerHTML=cards.join('')||`<div class="es"><p>No odds available.</p></div>`;
+  m.textContent=`${games.length} matches · ${cards.length} shown`;
+}
+
+async function loadAll(){
+  smartPicks=0;bestScore=0;
+  ['su','sp','sb'].forEach(id=>document.getElementById(id).textContent='...');
+  ['fg','bg','ug'].forEach(id=>{document.getElementById(id).innerHTML='<div class="ls"><div class="sp"></div><div class="lt">Fetching live odds...</div></div>';});
+
+  const [fb,bb,uf]=await Promise.all([
+    Promise.all(FBK.map(getOdds)).then(r=>r.flat()),
+    getOdds('basketball_nba'),
+    getOdds('mma_mixed_martial_arts')
+  ]);
+  allFb=fb;
+
+  await Promise.all([
+    renderGrid('fg','fm',fb,'FOOTBALL',true),
+    renderGrid('bg','bm',bb,'NBA',false),
+    renderGrid('ug','um',uf,'UFC/MMA',false)
+  ]);
+
+  document.getElementById('sg').textContent=fb.length+bb.length+uf.length;
+  document.getElementById('sp').textContent=smartPicks;
+  document.getElementById('sb').textContent=bestScore>0?bestScore.toFixed(1):'—';
+  document.getElementById('su').textContent=new Date().toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'});
+}
+
+function filterFb(key,btn){
+  document.querySelectorAll('.tabs .tab').forEach(t=>t.classList.remove('active'));
+  btn.classList.add('active');
+  const filtered=key==='all'?allFb:allFb.filter(g=>g.sport_key===key);
+  renderGrid('fg','fm',filtered,'FOOTBALL',true);
+}
+
+loadAll();
+</script>
+</body>
+</html>
