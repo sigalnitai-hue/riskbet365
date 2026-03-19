@@ -7,37 +7,44 @@
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
   <style>
     :root {
-      --bg:#0a0c10;--card:#13161e;--border:rgba(255,255,255,0.07);--bh:rgba(255,255,255,0.14);
+      --bg:#0a0c10;--card:#13161e;--card2:#181c24;
+      --border:rgba(255,255,255,0.07);--bh:rgba(255,255,255,0.13);
       --a:#00e57a;--a2:#00b8ff;--a3:#ff6b35;
-      --t:#f0f2f5;--t2:#8a8f9e;--t3:#555a6a;--gold:#f5c842;
+      --t:#f0f2f5;--t2:#8a8f9e;--t3:#454a58;--gold:#f5c842;
       --fd:'Bebas Neue',sans-serif;--fb:'DM Sans',sans-serif;--fm:'DM Mono',monospace;
     }
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
     body{background:var(--bg);color:var(--t);font-family:var(--fb);font-size:15px;line-height:1.6;overflow-x:hidden}
-    body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(0,229,122,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,229,122,.03) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;z-index:0}
+    body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(0,229,122,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(0,229,122,.025) 1px,transparent 1px);background-size:44px 44px;pointer-events:none;z-index:0}
     .orb{position:fixed;border-radius:50%;pointer-events:none;z-index:0}
-    .o1{top:-200px;left:-200px;width:600px;height:600px;background:radial-gradient(circle,rgba(0,229,122,.06) 0%,transparent 70%)}
-    .o2{bottom:-150px;right:-150px;width:500px;height:500px;background:radial-gradient(circle,rgba(0,184,255,.05) 0%,transparent 70%)}
-    nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 32px;height:64px;background:rgba(10,12,16,.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
+    .o1{top:-200px;left:-200px;width:600px;height:600px;background:radial-gradient(circle,rgba(0,229,122,.055) 0%,transparent 70%)}
+    .o2{bottom:-150px;right:-150px;width:500px;height:500px;background:radial-gradient(circle,rgba(0,184,255,.045) 0%,transparent 70%)}
+
+    /* NAV */
+    nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 32px;height:64px;background:rgba(10,12,16,.93);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
     .logo{font-family:var(--fd);font-size:22px;letter-spacing:1px;display:flex;align-items:center;gap:10px}
     .logo span{color:var(--a)}
     .dot{width:8px;height:8px;border-radius:50%;background:var(--a);box-shadow:0 0 8px var(--a);animation:pulse 2s ease-in-out infinite}
     @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.8)}}
     .nl{display:flex;gap:4px;list-style:none}
     .nl a{text-decoration:none;color:var(--t2);font-size:13px;font-weight:500;padding:6px 14px;border-radius:6px;transition:all .2s}
-    .nl a:hover,.nl a.active{color:var(--t);background:rgba(255,255,255,.06)}
-    .nl a.active{color:var(--a)}
-    .badge{font-size:11px;font-weight:600;background:rgba(0,229,122,.15);color:var(--a);border:1px solid rgba(0,229,122,.3);padding:4px 10px;border-radius:20px}
-    .hero{position:relative;z-index:1;padding:80px 32px 60px;max-width:1100px;margin:0 auto}
+    .nl a:hover{color:var(--t);background:rgba(255,255,255,.06)}
+    .nl a.active{color:var(--a);background:rgba(0,229,122,.08)}
+    .badge{font-size:11px;font-weight:600;background:rgba(0,229,122,.12);color:var(--a);border:1px solid rgba(0,229,122,.25);padding:4px 12px;border-radius:20px;letter-spacing:.5px}
+
+    /* HERO */
+    .hero{position:relative;z-index:1;padding:80px 32px 56px;max-width:1100px;margin:0 auto}
     .ey{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--a);margin-bottom:20px;font-family:var(--fm)}
-    .ey::before{content:'';display:block;width:24px;height:1px;background:var(--a)}
-    h1{font-family:var(--fd);font-size:clamp(48px,7vw,88px);line-height:.95;letter-spacing:2px;margin-bottom:24px}
+    .ey::before{content:'';display:block;width:28px;height:1px;background:var(--a)}
+    h1{font-family:var(--fd);font-size:clamp(48px,7vw,90px);line-height:.93;letter-spacing:2px;margin-bottom:24px}
     h1 em{font-style:normal;color:var(--a)}
-    .sub{font-size:16px;color:var(--t2);max-width:540px;line-height:1.7;margin-bottom:40px}
+    .sub{font-size:16px;color:var(--t2);max-width:540px;line-height:1.75;margin-bottom:40px}
     .acts{display:flex;gap:12px;flex-wrap:wrap}
-    .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 24px;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;border:none;transition:all .2s;text-decoration:none;font-family:var(--fb)}
-    .bp{background:var(--a);color:#000}.bp:hover{background:#00ff88;transform:translateY(-1px);box-shadow:0 8px 24px rgba(0,229,122,.3)}
-    .bg2{background:transparent;color:var(--t2);border:1px solid var(--bh)}.bg2:hover{color:var(--t);background:rgba(255,255,255,.04)}
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 26px;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;border:none;transition:all .2s;text-decoration:none;font-family:var(--fb);letter-spacing:.2px}
+    .bp{background:var(--a);color:#000}.bp:hover{background:#00ff88;transform:translateY(-1px);box-shadow:0 8px 28px rgba(0,229,122,.28)}
+    .bg2{background:transparent;color:var(--t2);border:1px solid var(--bh)}.bg2:hover{color:var(--t);background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.18)}
+
+    /* STATS BAR */
     .stats{position:relative;z-index:1;display:flex;max-width:1100px;margin:0 auto 64px;padding:0 32px}
     .si{flex:1;padding:20px 24px;border:1px solid var(--border);background:var(--card)}
     .si:first-child{border-radius:10px 0 0 10px}
@@ -45,8 +52,10 @@
     .si:not(:first-child):not(:last-child){border-left:none}
     .sv{font-family:var(--fd);font-size:32px;letter-spacing:1px;line-height:1;margin-bottom:4px}
     .sv.g{color:var(--a)}.sv.b{color:var(--a2)}.sv.o{color:var(--a3)}
-    .sl{font-size:12px;color:var(--t3);font-weight:500;letter-spacing:.5px;text-transform:uppercase}
-    .sec{position:relative;z-index:1;max-width:1100px;margin:0 auto 64px;padding:0 32px}
+    .sl{font-size:11px;color:var(--t3);font-weight:500;letter-spacing:.8px;text-transform:uppercase}
+
+    /* SECTION */
+    .sec{position:relative;z-index:1;max-width:1100px;margin:0 auto 72px;padding:0 32px}
     .sh{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:24px;flex-wrap:wrap;gap:12px}
     .st{font-family:var(--fd);font-size:28px;letter-spacing:1px}
     .st span{color:var(--a)}
@@ -54,95 +63,87 @@
     .tabs{display:flex;gap:8px;margin-bottom:24px;flex-wrap:wrap}
     .tab{padding:7px 16px;border-radius:6px;font-size:13px;font-weight:500;cursor:pointer;border:1px solid var(--border);background:transparent;color:var(--t2);transition:all .2s;font-family:var(--fb)}
     .tab:hover{color:var(--t);border-color:var(--bh)}
-    .tab.active{background:rgba(0,229,122,.1);border-color:rgba(0,229,122,.4);color:var(--a)}
-    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px}
+    .tab.active{background:rgba(0,229,122,.1);border-color:rgba(0,229,122,.35);color:var(--a)}
+    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:18px}
 
     /* CARD */
-    .card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px;transition:all .25s;position:relative;overflow:hidden}
-    .card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;opacity:0;transition:opacity .25s}
-    .card.vh::before{background:linear-gradient(90deg,var(--a),transparent);opacity:1}
-    .card.vm::before{background:linear-gradient(90deg,var(--gold),transparent)}
-    .card.vl::before{background:linear-gradient(90deg,var(--a3),transparent)}
-    .card:hover{border-color:var(--bh);transform:translateY(-2px);box-shadow:0 12px 32px rgba(0,0,0,.4)}
-    .card:hover::before{opacity:1}
-    .card.top{border-color:rgba(0,229,122,.3)}
+    .card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:22px;transition:border-color .25s,transform .25s,box-shadow .25s;position:relative;overflow:hidden}
+    .card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;transition:opacity .25s}
+    .card.vh::before{background:linear-gradient(90deg,var(--a),rgba(0,229,122,0));opacity:1}
+    .card.vm::before{background:linear-gradient(90deg,var(--gold),rgba(245,200,66,0));opacity:.7}
+    .card.vl::before{background:linear-gradient(90deg,var(--a3),rgba(255,107,53,0));opacity:.5}
+    .card:hover{border-color:var(--bh);transform:translateY(-2px);box-shadow:0 14px 36px rgba(0,0,0,.45)}
+    .card.top{border-color:rgba(0,229,122,.28)}
 
-    .ch{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:14px;gap:8px}
-    .cmeta{display:flex;flex-direction:column;gap:3px}
+    /* CARD HEADER */
+    .ch{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:16px;gap:10px}
+    .cmeta{display:flex;flex-direction:column;gap:3px;flex:1}
     .ctag{font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--t3);font-family:var(--fm)}
-    .cleague{font-size:11px;color:var(--t2)}
+    .cleague{font-size:12px;color:var(--t2);font-weight:500}
+    .matchup{font-size:15px;font-weight:600;color:var(--t);margin-top:4px;line-height:1.3}
 
-    /* SCORE CIRCLE */
-    .circle{width:52px;height:52px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;border:2px solid;flex-shrink:0}
-    .circle.h{border-color:var(--a);background:rgba(0,229,122,.08)}
-    .circle.m{border-color:var(--gold);background:rgba(245,200,66,.08)}
-    .circle.l{border-color:var(--a3);background:rgba(255,107,53,.08)}
-    .cn{font-family:var(--fd);font-size:20px;line-height:1}
-    .circle.h .cn{color:var(--a)}.circle.m .cn{color:var(--gold)}.circle.l .cn{color:var(--a3)}
-    .clb{font-size:8px;text-transform:uppercase;letter-spacing:.5px;color:var(--t3);font-family:var(--fm)}
+    /* VALUE CIRCLE */
+    .vcircle{width:54px;height:54px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;border:2px solid;flex-shrink:0}
+    .vcircle.h{border-color:var(--a);background:rgba(0,229,122,.07)}
+    .vcircle.m{border-color:var(--gold);background:rgba(245,200,66,.07)}
+    .vcircle.l{border-color:var(--a3);background:rgba(255,107,53,.07)}
+    .vnum{font-family:var(--fd);font-size:22px;line-height:1}
+    .vcircle.h .vnum{color:var(--a)}.vcircle.m .vnum{color:var(--gold)}.vcircle.l .vnum{color:var(--a3)}
+    .vlbl{font-size:8px;text-transform:uppercase;letter-spacing:.5px;color:var(--t3);font-family:var(--fm)}
 
-    /* PROBABILITY BARS */
-    .probwrap{margin-bottom:14px}
+    /* PROB BARS */
+    .probsec{margin-bottom:16px}
     .prow{margin-bottom:10px}
-    .prowh{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px}
-    .pname{font-size:13px;font-weight:500;color:var(--t);display:flex;align-items:center;gap:6px}
-    .prec{width:6px;height:6px;border-radius:50%;background:var(--a);display:inline-block}
-    .pvals{display:flex;align-items:center;gap:8px}
-    .podds{font-family:var(--fm);font-size:14px;font-weight:500;color:var(--a2);background:rgba(0,184,255,.08);padding:2px 8px;border-radius:4px}
-    .preal{font-size:11px;color:var(--t3);font-family:var(--fm)}
-    .pbar{height:6px;border-radius:3px;background:rgba(255,255,255,.06);overflow:hidden;position:relative}
-    .pbar-fill{height:100%;border-radius:3px;transition:width .6s ease}
-    .pbar-fill.team1{background:var(--a)}
-    .pbar-fill.team2{background:var(--a2)}
-    .pbar-fill.draw{background:rgba(255,255,255,.2)}
-    .pbar-imp{position:absolute;top:0;height:100%;background:rgba(255,255,255,.15);border-radius:3px}
-    .draw-row-new{display:flex;align-items:center;justify-content:space-between;padding:6px 0;border-top:1px solid var(--border);margin-top:6px}
+    .prowh{display:flex;justify-content:space-between;align-items:center;margin-bottom:5px}
+    .pname{font-size:13px;font-weight:500;color:var(--t);display:flex;align-items:center;gap:7px}
+    .precdot{width:7px;height:7px;border-radius:50%;background:var(--a);flex-shrink:0;box-shadow:0 0 5px var(--a)}
+    .pright{display:flex;align-items:center;gap:8px}
+    .pct{font-size:12px;font-weight:600;font-family:var(--fm)}
+    .pct.high{color:var(--a)}.pct.mid{color:var(--gold)}.pct.low{color:var(--a3)}.pct.neu{color:var(--t2)}
+    .podds{font-family:var(--fm);font-size:13px;font-weight:500;color:var(--a2);background:rgba(0,184,255,.08);padding:2px 9px;border-radius:4px}
+    .pbar{height:5px;border-radius:3px;background:rgba(255,255,255,.05);overflow:hidden}
+    .pbfill{height:100%;border-radius:3px;transition:width .8s cubic-bezier(.4,0,.2,1)}
+    .pbfill.c1{background:var(--a)}.pbfill.c2{background:var(--a2)}.pbfill.draw{background:rgba(255,255,255,.2)}
+    .drawrow{display:flex;align-items:center;justify-content:space-between;padding:7px 0 0;border-top:1px solid var(--border);margin-top:4px}
     .drawlbl{font-size:12px;color:var(--t3)}
-    .drawvals{display:flex;align-items:center;gap:8px}
+    .drawright{display:flex;align-items:center;gap:8px}
 
-    /* FORM DOTS */
-    .formwrap{display:flex;justify-content:space-between;margin-bottom:12px;gap:8px;flex-wrap:wrap}
-    .fteam{flex:1;min-width:120px}
-    .ftlbl{font-size:10px;color:var(--t3);letter-spacing:1px;text-transform:uppercase;font-family:var(--fm);margin-bottom:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-    .fdots{display:flex;gap:3px}
-    .fd{width:18px;height:18px;border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;font-family:var(--fm)}
-    .fd.W{background:rgba(0,229,122,.2);color:var(--a)}
-    .fd.D{background:rgba(245,200,66,.2);color:var(--gold)}
-    .fd.L{background:rgba(255,107,53,.2);color:var(--a3)}
+    /* AI ANALYSIS BOX */
+    .aibox{background:rgba(0,229,122,.03);border:1px solid rgba(0,229,122,.12);border-radius:10px;padding:14px 16px;margin-bottom:14px}
+    .ailabel{font-size:10px;font-weight:700;letter-spacing:1.8px;text-transform:uppercase;color:var(--a);font-family:var(--fm);margin-bottom:8px;display:flex;align-items:center;gap:6px}
+    .ailabel::before{content:'';display:block;width:14px;height:1px;background:var(--a)}
+    .aipick{font-size:15px;font-weight:600;color:var(--t);margin-bottom:6px}
+    .aireason{font-size:12px;color:var(--t2);line-height:1.7}
 
-    /* AI BOX */
-    .aib{background:rgba(0,229,122,.04);border:1px solid rgba(0,229,122,.15);border-radius:8px;padding:12px 14px;margin-bottom:12px}
-    .ail{font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--a);font-family:var(--fm);margin-bottom:5px}
-    .ait{font-size:12px;color:var(--t2);line-height:1.65}
+    /* EDGE PILL */
+    .edgepill{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-family:var(--fm);font-weight:600;padding:3px 10px;border-radius:20px;margin-bottom:10px}
+    .edgepill.pos{background:rgba(0,229,122,.1);color:var(--a);border:1px solid rgba(0,229,122,.2)}
+    .edgepill.neg{background:rgba(255,107,53,.08);color:var(--a3);border:1px solid rgba(255,107,53,.2)}
+    .edgepill.neu{background:rgba(255,255,255,.05);color:var(--t2);border:1px solid var(--border)}
 
-    /* STAT CHIPS */
-    .chips{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
-    .chip{font-size:10px;font-family:var(--fm);padding:3px 8px;border-radius:4px;border:1px solid var(--border)}
-    .chip.pos{color:var(--a);border-color:rgba(0,229,122,.2);background:rgba(0,229,122,.06)}
-    .chip.neg{color:var(--a3);border-color:rgba(255,107,53,.2);background:rgba(255,107,53,.06)}
-    .chip.neu{color:var(--t3);border-color:var(--border)}
-
-    .cf{display:flex;align-items:center;justify-content:space-between;margin-top:4px}
+    .cf{display:flex;align-items:center;justify-content:space-between;margin-top:2px}
     .mt{font-size:11px;color:var(--t3);font-family:var(--fm)}
     .bkt{font-size:10px;color:var(--t3)}
 
-    .ls{grid-column:1/-1;text-align:center;padding:60px 20px}
-    .sp{width:32px;height:32px;border:2px solid var(--border);border-top-color:var(--a);border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 16px}
+    /* LOADING */
+    .ls{grid-column:1/-1;text-align:center;padding:64px 20px}
+    .sp{width:36px;height:36px;border:2px solid var(--border);border-top-color:var(--a);border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 16px}
     @keyframes spin{to{transform:rotate(360deg)}}
     .lt{font-size:13px;color:var(--t3);font-family:var(--fm)}
-    .es{grid-column:1/-1;text-align:center;padding:40px 20px}
-    .es p{font-size:13px;color:var(--t2);margin-bottom:6px}
+    .es{grid-column:1/-1;text-align:center;padding:48px 20px}
+    .es p{font-size:14px;color:var(--t2);margin-bottom:8px}
     .es small{font-size:11px;font-family:var(--fm);color:var(--t3)}
 
+    /* FOOTER */
     footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:32px;max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
     .flogo{font-family:var(--fd);font-size:18px;letter-spacing:1px;color:var(--t3)}
-    .fdis{font-size:11px;color:var(--t3);max-width:500px;line-height:1.6;text-align:center}
+    .fdis{font-size:11px;color:var(--t3);max-width:520px;line-height:1.65;text-align:center}
     .fdis strong{color:var(--a3)}
 
-    @keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
     .fu{animation:fadeUp .5s ease forwards;opacity:0}
-    .fu:nth-child(1){animation-delay:.05s}.fu:nth-child(2){animation-delay:.1s}.fu:nth-child(3){animation-delay:.15s}
-    .fu:nth-child(4){animation-delay:.2s}.fu:nth-child(5){animation-delay:.25s}.fu:nth-child(6){animation-delay:.3s}
+    .fu:nth-child(1){animation-delay:.04s}.fu:nth-child(2){animation-delay:.09s}.fu:nth-child(3){animation-delay:.14s}
+    .fu:nth-child(4){animation-delay:.19s}.fu:nth-child(5){animation-delay:.24s}.fu:nth-child(6){animation-delay:.29s}
 
     @media(max-width:640px){
       nav{padding:0 16px}.nl{display:none}
@@ -165,22 +166,22 @@
     <li><a href="#basketball">Basketball</a></li>
     <li><a href="#ufc">UFC</a></li>
   </ul>
-  <div class="badge">LIVE ODDS</div>
+  <div class="badge">AI POWERED</div>
 </nav>
 
 <section class="hero">
-  <div class="ey">Real stats · Real probability · Smart value</div>
-  <h1>FIND YOUR<br><em>BEST BET</em><br>TODAY</h1>
-  <p class="sub">Uses real team stats — win rate, home record, recent form, goals — to calculate true win probability. Not fooled by high odds on weak teams.</p>
+  <div class="ey">Claude AI · Live odds · Real analysis</div>
+  <h1>SMARTER<br><em>BETTING</em><br>STARTS HERE</h1>
+  <p class="sub">Claude AI analyses every match — team strength, form, home advantage, league position — then finds games where the odds underestimate the real win chance.</p>
   <div class="acts">
-    <button class="btn bp" onclick="loadAll()">⚡ Refresh Live Odds</button>
+    <button class="btn bp" onclick="loadAll()">⚡ Analyse Matches Now</button>
     <a href="#football" class="btn bg2">Browse Matches →</a>
   </div>
 </section>
 
 <div class="stats">
   <div class="si"><div class="sv g" id="s1">—</div><div class="sl">Live matches</div></div>
-  <div class="si"><div class="sv b" id="s2">—</div><div class="sl">Smart picks</div></div>
+  <div class="si"><div class="sv b" id="s2">—</div><div class="sl">Value bets found</div></div>
   <div class="si"><div class="sv o" id="s3">—</div><div class="sl">Best value score</div></div>
   <div class="si"><div class="sv" id="s4">—</div><div class="sl">Last updated</div></div>
 </div>
@@ -193,365 +194,288 @@
     <button class="tab" onclick="filterFb('soccer_spain_la_liga',this)">La Liga</button>
     <button class="tab" onclick="filterFb('soccer_uefa_champs_league',this)">Champ. League</button>
   </div>
-  <div class="grid" id="fg"><div class="ls"><div class="sp"></div><div class="lt">Fetching live odds...</div></div></div>
+  <div class="grid" id="fg"><div class="ls"><div class="sp"></div><div class="lt">Fetching matches...</div></div></div>
 </section>
 
 <section class="sec" id="basketball">
   <div class="sh"><div class="st">🏀 Basketball <span>/ NBA</span></div><div class="sm" id="bm">Loading...</div></div>
-  <div class="grid" id="bg"><div class="ls"><div class="sp"></div><div class="lt">Fetching live odds...</div></div></div>
+  <div class="grid" id="bg"><div class="ls"><div class="sp"></div><div class="lt">Fetching matches...</div></div></div>
 </section>
 
 <section class="sec" id="ufc">
   <div class="sh"><div class="st">🥊 UFC <span>/ MMA</span></div><div class="sm" id="um">Loading...</div></div>
-  <div class="grid" id="ug"><div class="ls"><div class="sp"></div><div class="lt">Fetching live odds...</div></div></div>
+  <div class="grid" id="ug"><div class="ls"><div class="sp"></div><div class="lt">Fetching matches...</div></div></div>
 </section>
 
 <footer>
   <div class="flogo">AI GAMING / RISKBET365</div>
-  <div class="fdis"><strong>⚠ Responsible Gambling:</strong> For informational purposes only. All probability calculations are statistical estimates and not guarantees. Never bet more than you can afford to lose.</div>
+  <div class="fdis"><strong>⚠ Responsible Gambling:</strong> For informational purposes only. AI analysis is an estimate based on historical knowledge — not a guarantee. Never bet more than you can afford to lose.</div>
 </footer>
 
 <script>
-// ── KEYS ──
-const OK = 'dbd9d18741e8a073ff58e77a564b22d7';
-const RK = '7e5b655766msh21172db609e15ccp12c2bcjsn0ce72809dbe3';
+const ODDS_KEY = 'dbd9d18741e8a073ff58e77a564b22d7';
+const AI_KEY   = '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';
 const OB = 'https://api.the-odds-api.com/v4';
-const FH = {'x-rapidapi-key':RK,'x-rapidapi-host':'api-football-v1.p.rapidapi.com'};
-const SEASON = 2024;
-
-// Football league ID map (The-Odds key → API-Football league ID)
-const LEAGUE_MAP = {
-  'soccer_epl': 39,
-  'soccer_spain_la_liga': 140,
-  'soccer_uefa_champs_league': 2,
-  'soccer_italy_serie_a': 135,
-  'soccer_germany_bundesliga': 78,
-  'soccer_france_ligue_one': 61
-};
-const FB_KEYS = Object.keys(LEAGUE_MAP);
+const FB_KEYS = ['soccer_epl','soccer_spain_la_liga','soccer_uefa_champs_league','soccer_italy_serie_a','soccer_germany_bundesliga'];
 
 let allFb = [], smartPicks = 0, bestScore = 0;
-
-// Cache to save API calls
-const teamCache = {};
-const formCache = {};
+const aiCache = {};
 
 // ── FETCH ODDS ──
 async function getOdds(key) {
   try {
-    const r = await fetch(`${OB}/sports/${key}/odds/?apiKey=${OK}&regions=eu&markets=h2h&oddsFormat=decimal`);
+    const r = await fetch(`${OB}/sports/${key}/odds/?apiKey=${ODDS_KEY}&regions=eu&markets=h2h&oddsFormat=decimal`);
     return r.ok ? await r.json() : [];
   } catch(e) { return []; }
 }
 
-// ── FETCH TEAM STATS (season stats: wins, losses, goals) ──
-async function getTeamStats(teamName, leagueId) {
-  const ckey = `${teamName}_${leagueId}`;
-  if (teamCache[ckey] !== undefined) return teamCache[ckey];
+// ── CALL CLAUDE AI FOR MATCH ANALYSIS ──
+async function analyseMatch(homeTeam, awayTeam, sport, outcomes) {
+  const cacheKey = `${homeTeam}_${awayTeam}`;
+  if (aiCache[cacheKey]) return aiCache[cacheKey];
+
+  const oddsText = outcomes.map(o => `${o.name}: ${parseFloat(o.price).toFixed(2)}`).join(', ');
+
+  const prompt = `You are a professional sports betting analyst. Analyse this upcoming ${sport} match and provide win probabilities based on your knowledge of these teams.
+
+Match: ${homeTeam} (HOME) vs ${awayTeam} (AWAY)
+Bookmaker odds: ${oddsText}
+
+Consider: current season form, league position, historical head-to-head, home advantage, team strength, injuries if known, recent results.
+
+Respond ONLY with a valid JSON object like this — no extra text, no markdown:
+{
+  "home_prob": 55,
+  "away_prob": 30,
+  "draw_prob": 15,
+  "pick": "${homeTeam}",
+  "confidence": "high",
+  "reasoning": "2-3 sentence explanation of why this team is the best bet, mentioning their form and the value in the odds"
+}
+
+Rules:
+- home_prob + away_prob + draw_prob must equal 100
+- pick must be the name of the team or "Draw" with the best combination of real win chance AND value vs bookmaker odds
+- confidence must be: "high", "medium", or "low"
+- reasoning must mention both team strength AND whether the odds offer value`;
 
   try {
-    // Step 1: find team ID
-    const sr = await fetch(`https://api-football-v1.p.rapidapi.com/v3/teams?search=${encodeURIComponent(teamName)}`, {headers: FH});
-    if (!sr.ok) { teamCache[ckey]=null; return null; }
-    const sd = await sr.json();
-    const team = sd.response?.[0];
-    if (!team) { teamCache[ckey]=null; return null; }
-    const tid = team.team.id;
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'x-api-key': AI_KEY, 'anthropic-version': '2023-06-01' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 400,
+        messages: [{ role: 'user', content: prompt }]
+      })
+    });
 
-    // Step 2: season standings (win rate, home/away)
-    const stR = await fetch(`https://api-football-v1.p.rapidapi.com/v3/teams/statistics?team=${tid}&league=${leagueId}&season=${SEASON}`, {headers: FH});
-    let seasonStats = null;
-    if (stR.ok) {
-      const stD = await stR.json();
-      const s = stD.response;
-      if (s) {
-        const played = s.fixtures?.played?.total || 1;
-        const wins = s.fixtures?.wins?.total || 0;
-        const draws = s.fixtures?.draws?.total || 0;
-        const losses = s.fixtures?.loses?.total || 0;
-        const goalsFor = s.goals?.for?.total?.total || 0;
-        const goalsAgainst = s.goals?.against?.total?.total || 0;
-        const homeWins = s.fixtures?.wins?.home || 0;
-        const homePlayed = s.fixtures?.played?.home || 1;
-        const awayWins = s.fixtures?.wins?.away || 0;
-        const awayPlayed = s.fixtures?.played?.away || 1;
-        seasonStats = {
-          winRate: (wins / played) * 100,
-          drawRate: (draws / played) * 100,
-          homeWinRate: (homeWins / homePlayed) * 100,
-          awayWinRate: (awayWins / awayPlayed) * 100,
-          avgGoalsFor: goalsFor / played,
-          avgGoalsAgainst: goalsAgainst / played,
-          played, wins, draws, losses
-        };
-      }
-    }
-
-    // Step 3: last 5 fixtures form
-    const fR = await fetch(`https://api-football-v1.p.rapidapi.com/v3/fixtures?team=${tid}&last=5`, {headers: FH});
-    let form = [], formScore = 50;
-    if (fR.ok) {
-      const fD = await fR.json();
-      const fixtures = fD.response || [];
-      let fw=0,fd=0,fl=0;
-      form = fixtures.map(fx => {
-        const h = fx.teams.home, aw = fx.teams.away;
-        const isH = h.id === tid;
-        if (h.winner===null && aw.winner===null){fd++;return'D';}
-        const won = isH ? h.winner : aw.winner;
-        if(won){fw++;return'W';} fl++;return'L';
-      });
-      formScore = ((fw*3+fd) / ((fw+fd+fl||1)*3)) * 100;
-    }
-
-    const result = { tid, teamName, seasonStats, form, formScore };
-    teamCache[ckey] = result;
-    return result;
-  } catch(e) { teamCache[ckey]=null; return null; }
+    if (!res.ok) return null;
+    const data = await res.json();
+    const text = data.content?.[0]?.text || '';
+    const jsonMatch = text.match(/\{[\s\S]*\}/);
+    if (!jsonMatch) return null;
+    const parsed = JSON.parse(jsonMatch[0]);
+    aiCache[cacheKey] = parsed;
+    return parsed;
+  } catch(e) { return null; }
 }
 
-// ── REAL PROBABILITY CALCULATION ──
-// Uses: win rate 30%, home/away record 25%, form last 5 = 30%, goal difference 15%
-function calcRealProb(stats, isHome) {
-  if (!stats || !stats.seasonStats) return 50; // fallback
-  const s = stats.seasonStats;
-
-  const winRate = s.winRate;
-  const locationRate = isHome ? s.homeWinRate : s.awayWinRate;
-  const formPct = stats.formScore;
-  const goalDiff = s.avgGoalsFor - s.avgGoalsAgainst;
-  const goalScore = Math.min(100, Math.max(0, 50 + (goalDiff * 10)));
-
-  return (winRate * 0.30) + (locationRate * 0.25) + (formPct * 0.30) + (goalScore * 0.15);
-}
-
-// ── VALUE SCORE ──
-// Compares real probability vs bookmaker implied probability
+// ── VALUE SCORE: real prob vs bookmaker implied ──
 function calcValue(realProb, odds) {
-  const implied = (1 / odds) * 100 / 1.05; // remove bookmaker margin
+  const implied = (1 / odds) * 100 / 1.05;
   const edge = realProb - implied;
-  const score = Math.min(10, Math.max(0, 5 + (edge / 6)));
-  return { score: +score.toFixed(1), edge: +edge.toFixed(1), implied: +implied.toFixed(1), real: +realProb.toFixed(1) };
+  const score = Math.min(10, Math.max(0, 5 + (edge / 5)));
+  return { score: +score.toFixed(1), edge: +edge.toFixed(1), implied: +implied.toFixed(1) };
 }
 
-function scClass(s){return s>=6.5?'h':s>=4.5?'m':'l';}
-function ccClass(s){return s>=6.5?'vh':s>=4.5?'vm':'vl';}
-function fmt(v){return parseFloat(v).toFixed(2);}
-function fmtT(d){return new Date(d).toLocaleDateString('en-GB',{weekday:'short',month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'});}
-function cap(s){return s?s.charAt(0).toUpperCase()+s.slice(1):'';}
+function scClass(s) { return s>=6.5?'h':s>=4.5?'m':'l'; }
+function ccClass(s) { return s>=6.5?'vh':s>=4.5?'vm':'vl'; }
+function fmt(v) { return parseFloat(v).toFixed(2); }
+function fmtT(d) { return new Date(d).toLocaleDateString('en-GB',{weekday:'short',month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'}); }
 
-function formDots(form) {
-  if(!form||!form.length) return '<span style="font-size:10px;color:var(--t3)">—</span>';
-  return form.map(r=>`<div class="fd ${r}">${r}</div>`).join('');
-}
-
-function buildChips(stats, isHome) {
-  if (!stats?.seasonStats) return '';
-  const s = stats.seasonStats;
-  const chips = [];
-  if (s.winRate >= 55) chips.push(`<span class="chip pos">Win rate ${s.winRate.toFixed(0)}%</span>`);
-  else if (s.winRate <= 35) chips.push(`<span class="chip neg">Win rate ${s.winRate.toFixed(0)}%</span>`);
-  else chips.push(`<span class="chip neu">Win rate ${s.winRate.toFixed(0)}%</span>`);
-
-  const locR = isHome ? s.homeWinRate : s.awayWinRate;
-  const locLabel = isHome ? 'Home' : 'Away';
-  if (locR >= 55) chips.push(`<span class="chip pos">${locLabel} ${locR.toFixed(0)}%</span>`);
-  else if (locR <= 30) chips.push(`<span class="chip neg">${locLabel} ${locR.toFixed(0)}%</span>`);
-  else chips.push(`<span class="chip neu">${locLabel} ${locR.toFixed(0)}%</span>`);
-
-  const gd = s.avgGoalsFor - s.avgGoalsAgainst;
-  if (gd > 0.5) chips.push(`<span class="chip pos">Goal diff +${gd.toFixed(1)}</span>`);
-  else if (gd < -0.3) chips.push(`<span class="chip neg">Goal diff ${gd.toFixed(1)}</span>`);
-
-  return chips.join('');
-}
-
-function buildReasoning(pick, vs, stats, isHome) {
-  const parts = [];
-  if (stats?.seasonStats) {
-    const s = stats.seasonStats;
-    parts.push(`${pick} have a ${s.winRate.toFixed(0)}% win rate this season (${s.wins}W ${s.draws}D ${s.losses}L).`);
-    const locR = isHome ? s.homeWinRate : s.awayWinRate;
-    parts.push(`${isHome ? 'Home' : 'Away'} win rate: ${locR.toFixed(0)}%.`);
-  }
-  if (vs.edge > 0) {
-    parts.push(`Real win chance (${vs.real}%) is higher than bookmaker price (${vs.implied}%) — edge: +${vs.edge}%.`);
-  } else {
-    parts.push(`Bookmaker price (${vs.implied}%) slightly overestimates real chance (${vs.real}%) but this is still the best option in this match.`);
-  }
-  return parts.join(' ');
+function pctClass(p) {
+  if(p>=60) return 'high';
+  if(p>=40) return 'mid';
+  if(p>=25) return 'low';
+  return 'neu';
 }
 
 // ── BUILD CARD ──
-async function buildCard(game, label, leagueId) {
+async function buildCard(game, label, sport) {
   const outcomes = game.bookmakers?.[0]?.markets?.[0]?.outcomes || [];
   if (!outcomes.length) return null;
 
-  const teamOutcomes = outcomes.filter(o => o.name !== 'Draw');
+  const homeTeam = game.home_team;
+  const awayTeam = game.away_team;
   const drawOutcome = outcomes.find(o => o.name === 'Draw');
+  const teamOutcomes = outcomes.filter(o => o.name !== 'Draw');
 
-  // Determine home/away (first team listed = home in most APIs)
-  const homeTeam = game.home_team || teamOutcomes[0]?.name;
-  const awayTeam = game.away_team || teamOutcomes[1]?.name;
+  // Get AI analysis
+  const ai = await analyseMatch(homeTeam, awayTeam, sport, outcomes);
 
-  // Fetch real stats for both teams
-  let statsMap = {};
-  if (leagueId) {
-    const fetches = teamOutcomes.map(o => getTeamStats(o.name, leagueId).then(s => { statsMap[o.name] = s; }));
-    await Promise.all(fetches);
+  // Map AI probabilities to outcomes
+  let probMap = {};
+  if (ai) {
+    probMap[homeTeam] = ai.home_prob;
+    probMap[awayTeam] = ai.away_prob;
+    if (drawOutcome) probMap['Draw'] = ai.draw_prob;
+  } else {
+    // Fallback: use inverse odds as probability estimate
+    const total = outcomes.reduce((s,o) => s + 1/o.price, 0);
+    outcomes.forEach(o => { probMap[o.name] = ((1/o.price)/total)*100; });
   }
 
-  // Calculate real probability for each team
-  let bestOut = null, bestVS = {score:0,edge:-99,implied:0,real:0};
-  const teamProbs = {};
-
+  // Find the best VALUE bet: highest (real_prob - implied_prob)
+  let bestOut = null, bestVS = { score: 0, edge: -99, implied: 0 };
   for (const o of teamOutcomes) {
-    const isHome = o.name === homeTeam;
-    const stats = statsMap[o.name];
-    const realProb = calcRealProb(stats, isHome);
-    teamProbs[o.name] = { realProb, stats, isHome };
-    const vs = calcValue(realProb, o.price);
+    const rp = probMap[o.name] || 0;
+    const vs = calcValue(rp, o.price);
     if (vs.score > bestVS.score) { bestVS = vs; bestOut = o; }
   }
-  if (!bestOut) bestOut = teamOutcomes[0] || outcomes[0];
+  // Also check draw for value
+  if (drawOutcome && probMap['Draw']) {
+    const dvs = calcValue(probMap['Draw'], drawOutcome.price);
+    if (dvs.score > bestVS.score) { bestVS = dvs; bestOut = drawOutcome; }
+  }
+  if (!bestOut) bestOut = outcomes[0];
 
-  const pickedStats = statsMap[bestOut.name];
-  const pickedInfo = teamProbs[bestOut.name] || {};
+  // Override pick with AI's pick if AI has higher confidence
+  let pickedName = bestOut.name;
+  if (ai && ai.pick && ai.confidence === 'high') {
+    const aiPickOutcome = outcomes.find(o => o.name === ai.pick);
+    if (aiPickOutcome) {
+      const aiVS = calcValue(probMap[ai.pick]||50, aiPickOutcome.price);
+      if (aiVS.score > 3) { bestOut = aiPickOutcome; bestVS = aiVS; pickedName = ai.pick; }
+    }
+  }
+
   const sc = scClass(bestVS.score);
   const cc = ccClass(bestVS.score);
   const isTop = bestVS.score >= 6.5;
   if (bestVS.score > bestScore) bestScore = bestVS.score;
   if (isTop) smartPicks++;
 
-  // Build probability bars for each team
-  const totalRealProb = Object.values(teamProbs).reduce((s,v)=>s+v.realProb,0) + (drawOutcome ? 25 : 0);
-  const normalize = (p) => Math.round((p / (totalRealProb||100)) * 100);
-
-  let probBarsHTML = teamOutcomes.map((o, idx) => {
-    const info = teamProbs[o.name] || {realProb:50};
-    const normReal = normalize(info.realProb);
-    const implPct = Math.round((1/o.price)*100/1.05);
-    const isRec = o.name === bestOut.name;
-    const barColor = idx===0 ? 'team1' : 'team2';
+  // Build probability bars
+  const probBars = teamOutcomes.map((o, idx) => {
+    const rp = Math.round(probMap[o.name] || 0);
+    const isRec = o.name === pickedName;
+    const pc = pctClass(rp);
     return `
       <div class="prow">
         <div class="prowh">
-          <span class="pname">${isRec?'<span class="prec"></span>':''}${o.name}</span>
-          <div class="pvals">
-            <span class="preal">${normReal}% real</span>
+          <span class="pname">${isRec ? '<span class="precdot"></span>' : ''}<span>${o.name}</span></span>
+          <div class="pright">
+            <span class="pct ${pc}">${rp}%</span>
             <span class="podds">${fmt(o.price)}</span>
           </div>
         </div>
-        <div class="pbar">
-          <div class="pbar-fill ${barColor}" style="width:${normReal}%"></div>
-          <div class="pbar-imp" style="left:0;width:${implPct}%;opacity:.4"></div>
-        </div>
+        <div class="pbar"><div class="pbfill c${idx+1}" style="width:${rp}%"></div></div>
       </div>`;
   }).join('');
 
-  if (drawOutcome) {
-    const drawPct = Math.round((1/drawOutcome.price)*100/1.05);
-    probBarsHTML += `<div class="draw-row-new">
+  const drawBar = drawOutcome ? `
+    <div class="drawrow">
       <span class="drawlbl">Draw</span>
-      <div class="drawvals"><span class="preal">${drawPct}% implied</span><span style="font-family:var(--fm);font-size:13px;color:var(--t2);background:rgba(255,255,255,.05);padding:2px 8px;border-radius:4px">${fmt(drawOutcome.price)}</span></div>
-    </div>`;
-  }
-
-  // Form dots for both teams
-  const formHTML = teamOutcomes.length >= 2 ? `
-    <div class="formwrap">
-      ${teamOutcomes.map(o => {
-        const s = statsMap[o.name];
-        return `<div class="fteam"><div class="ftlbl">${o.name}</div><div class="fdots">${formDots(s?.form)}</div></div>`;
-      }).join('')}
+      <div class="drawright">
+        <span class="pct neu">${Math.round(probMap['Draw']||0)}%</span>
+        <span class="podds">${fmt(drawOutcome.price)}</span>
+      </div>
     </div>` : '';
 
-  const chips = buildChips(pickedStats, pickedInfo.isHome);
-  const chipsHTML = chips ? `<div class="chips">${chips}</div>` : '';
-  const reasoning = buildReasoning(bestOut.name, bestVS, pickedStats, pickedInfo.isHome);
+  // Edge pill
+  const edgeClass = bestVS.edge > 2 ? 'pos' : bestVS.edge < -2 ? 'neg' : 'neu';
+  const edgeLabel = bestVS.edge > 0 ? `+${bestVS.edge}% edge vs bookmaker` : `${bestVS.edge}% vs bookmaker`;
+
+  // AI reasoning text
+  const reasoning = ai?.reasoning || `Based on available data, ${pickedName} offers the best combination of win probability and odds value in this match.`;
+  const confLabel = ai ? `AI Pick · ${ai.confidence} confidence` : 'AI Pick';
 
   return `<div class="card ${cc}${isTop?' top':''} fu">
     <div class="ch">
-      <div class="cmeta"><div class="ctag">${label}</div><div class="cleague">${game.sport_title||''}</div></div>
-      <div class="circle ${sc}"><span class="cn">${bestVS.score}</span><span class="clb">VALUE</span></div>
+      <div class="cmeta">
+        <span class="ctag">${label}</span>
+        <span class="cleague">${game.sport_title||''}</span>
+        <span class="matchup">${homeTeam} vs ${awayTeam}</span>
+      </div>
+      <div class="vcircle ${sc}">
+        <span class="vnum">${bestVS.score}</span>
+        <span class="vlbl">VALUE</span>
+      </div>
     </div>
-    <div class="probwrap">${probBarsHTML}</div>
-    ${formHTML}
-    ${chipsHTML}
-    <div class="aib">
-      <div class="ail">⚡ AI Pick: ${bestOut.name}</div>
-      <div class="ait">${reasoning}</div>
+
+    <div class="probsec">
+      ${probBars}
+      ${drawBar}
     </div>
-    <div class="cf"><span class="mt">${fmtT(game.commence_time)}</span><span class="bkt">${game.bookmakers?.[0]?.title||''}</span></div>
+
+    <span class="edgepill ${edgeClass}">${edgeLabel}</span>
+
+    <div class="aibox">
+      <div class="ailabel">${confLabel}</div>
+      <div class="aipick">→ ${pickedName}</div>
+      <div class="aireason">${reasoning}</div>
+    </div>
+
+    <div class="cf">
+      <span class="mt">${fmtT(game.commence_time)}</span>
+      <span class="bkt">${game.bookmakers?.[0]?.title||''}</span>
+    </div>
   </div>`;
 }
 
-async function renderGrid(gid, mid, games, label, leagueId) {
+// ── RENDER GRID ──
+async function renderGrid(gid, mid, games, label, sport) {
   const g = document.getElementById(gid), m = document.getElementById(mid);
   if (!games?.length) {
-    g.innerHTML=`<div class="es"><p>No upcoming matches found.</p><small>Check back later.</small></div>`;
-    m.textContent='0 matches'; return;
+    g.innerHTML = `<div class="es"><p>No upcoming matches found.</p><small>Check back later for new fixtures.</small></div>`;
+    m.textContent = '0 matches'; return;
   }
-  g.innerHTML=`<div class="ls"><div class="sp"></div><div class="lt">Analysing team stats...</div></div>`;
-  const cards = (await Promise.all(games.slice(0,8).map(gm=>buildCard(gm,label,leagueId)))).filter(Boolean);
-  g.innerHTML = cards.join('') || `<div class="es"><p>No data available.</p></div>`;
-  m.textContent = `${games.length} matches · ${cards.length} shown`;
+  g.innerHTML = `<div class="ls"><div class="sp"></div><div class="lt">Claude AI is analysing matches...</div></div>`;
+  // Process in batches of 3 to avoid rate limits
+  const subset = games.slice(0, 6);
+  const cards = [];
+  for (let i = 0; i < subset.length; i += 3) {
+    const batch = subset.slice(i, i+3);
+    const batchCards = await Promise.all(batch.map(gm => buildCard(gm, label, sport)));
+    cards.push(...batchCards.filter(Boolean));
+    if (i+3 < subset.length) await new Promise(r => setTimeout(r, 800));
+  }
+  g.innerHTML = cards.join('') || `<div class="es"><p>No data available right now.</p></div>`;
+  m.textContent = `${games.length} matches · ${cards.length} analysed`;
 }
 
+// ── LOAD ALL ──
 async function loadAll() {
-  smartPicks=0; bestScore=0;
-  ['s2','s3','s4'].forEach(id=>document.getElementById(id).textContent='...');
-  ['fg','bg','ug'].forEach(id=>{document.getElementById(id).innerHTML='<div class="ls"><div class="sp"></div><div class="lt">Fetching live odds...</div></div>';});
+  smartPicks = 0; bestScore = 0;
+  Object.keys(aiCache).forEach(k => delete aiCache[k]);
+  ['s2','s3','s4'].forEach(id => document.getElementById(id).textContent = '...');
+  ['fg','bg','ug'].forEach(id => {
+    document.getElementById(id).innerHTML = '<div class="ls"><div class="sp"></div><div class="lt">Fetching live odds...</div></div>';
+  });
 
-  // Fetch all odds in parallel
-  const [fbGroups, bb, uf] = await Promise.all([
-    Promise.all(FB_KEYS.map(k => getOdds(k).then(r => r.map(g=>({...g,_key:k}))))).then(r=>r.flat()),
+  const [fb, bb, uf] = await Promise.all([
+    Promise.all(FB_KEYS.map(k => getOdds(k).then(r => r.map(g => ({...g, _key:k}))))).then(r => r.flat()),
     getOdds('basketball_nba'),
     getOdds('mma_mixed_martial_arts')
   ]);
-  allFb = fbGroups;
+  allFb = fb;
 
-  // Render all grids — football uses stats, others use odds-only
-  await Promise.all([
-    renderGrid('fg','fm', fbGroups, 'FOOTBALL', null), // leagueId resolved per-card from _key
-    renderGrid('bg','bm', bb, 'NBA', null),
-    renderGrid('ug','um', uf, 'UFC/MMA', null)
-  ]);
+  await renderGrid('fg', 'fm', fb, 'FOOTBALL', 'football');
+  await renderGrid('bg', 'bm', bb, 'NBA', 'basketball');
+  await renderGrid('ug', 'um', uf, 'UFC/MMA', 'MMA');
 
-  document.getElementById('s1').textContent = fbGroups.length + bb.length + uf.length;
+  document.getElementById('s1').textContent = fb.length + bb.length + uf.length;
   document.getElementById('s2').textContent = smartPicks;
-  document.getElementById('s3').textContent = bestScore>0 ? bestScore.toFixed(1) : '—';
+  document.getElementById('s3').textContent = bestScore > 0 ? bestScore.toFixed(1) : '—';
   document.getElementById('s4').textContent = new Date().toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'});
 }
 
-// Override buildCard for football to pass correct league ID from game._key
-const _origBuildCard = buildCard;
-async function buildCardFb(game, label) {
-  const leagueId = LEAGUE_MAP[game._key] || null;
-  return _origBuildCard(game, label, leagueId);
-}
-
-// Patch renderGrid to use buildCardFb for football
-async function renderGrid(gid, mid, games, label, leagueId) {
-  const g = document.getElementById(gid), m = document.getElementById(mid);
-  if (!games?.length) {
-    g.innerHTML=`<div class="es"><p>No upcoming matches found.</p><small>Check back later.</small></div>`;
-    m.textContent='0 matches'; return;
-  }
-  g.innerHTML=`<div class="ls"><div class="sp"></div><div class="lt">Analysing team stats...</div></div>`;
-  const isFb = gid === 'fg';
-  const cards = (await Promise.all(
-    games.slice(0,8).map(gm => isFb ? buildCardFb(gm,label) : buildCard(gm,label,null))
-  )).filter(Boolean);
-  g.innerHTML = cards.join('') || `<div class="es"><p>No data available.</p></div>`;
-  m.textContent = `${games.length} matches · ${cards.length} shown`;
-}
-
 function filterFb(key, btn) {
-  document.querySelectorAll('.tabs .tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.tabs .tab').forEach(t => t.classList.remove('active'));
   btn.classList.add('active');
-  const filtered = key==='all' ? allFb : allFb.filter(g=>g._key===key);
-  renderGrid('fg','fm',filtered,'FOOTBALL',null);
+  const filtered = key === 'all' ? allFb : allFb.filter(g => g._key === key);
+  renderGrid('fg', 'fm', filtered, 'FOOTBALL', 'football');
 }
 
 loadAll();
